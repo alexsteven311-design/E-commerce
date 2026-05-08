@@ -1,0 +1,62 @@
+<div class="admin-page">
+  <div class="page-top">
+    <div>
+      <h2>📊 Inventory Tracking</h2>
+      <p>Monitor and update product stock levels</p>
+    </div>
+    <div class="inv-summary">
+      <span class="inv-badge green">{{ inventory.filter(p => p.status === 'In Stock').length }} In Stock</span>
+      <span class="inv-badge orange">{{ inventory.filter(p => p.status === 'Low Stock').length }} Low</span>
+      <span class="inv-badge red">{{ inventory.filter(p => p.status === 'Out of Stock').length }} Out</span>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Update Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of inventory; track p.id) {
+          <tr>
+            <td>
+              <div class="prod-cell">
+                <img [src]="p.image" [alt]="p.name" />
+                <strong>{{ p.name }}</strong>
+              </div>
+            </td>
+            <td><span class="cat-badge">{{ p.category }}</span></td>
+            <td class="price">${{ p.price.toFixed(2) }}</td>
+            <td>
+              @if (editingId() === p.id) {
+                <input type="number" [(ngModel)]="newStock[p.id]" class="stock-input" min="0" />
+              } @else {
+                <span [class.low]="p.stock <= 5" [class.out]="p.stock === 0">{{ p.stock }}</span>
+              }
+            </td>
+            <td>
+              <span class="status-pill" [class.in]="p.status === 'In Stock'" [class.low]="p.status === 'Low Stock'" [class.out]="p.status === 'Out of Stock'">
+                {{ p.status }}
+              </span>
+            </td>
+            <td>
+              @if (editingId() === p.id) {
+                <button class="btn-save-sm" (click)="saveStock(p.id)">✓ Save</button>
+                <button class="btn-cancel-sm" (click)="editingId.set(null)">✕</button>
+              } @else {
+                <button class="btn-edit" (click)="startEdit(p.id, p.stock)">✏️ Edit</button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="checkout-page">
+  <div class="steps">
+    <span [class.active]="step() === 'address'" [class.done]="step() !== 'address'">1. Address</span>
+    <span class="sep">›</span>
+    <span [class.active]="step() === 'payment'" [class.done]="step() === 'confirm'">2. Payment</span>
+    <span class="sep">›</span>
+    <span [class.active]="step() === 'confirm'">3. Confirm</span>
+  </div>
+
+  <div class="layout">
+    <div class="form-card">
+      <div class="error" *ngIf="error">{{ error }}</div>
+
+      <!-- Step 1: Address -->
+      <div *ngIf="step() === 'address'">
+        <h3>Delivery Address</h3>
+        <input [(ngModel)]="address.name" placeholder="Full Name" />
+        <input [(ngModel)]="address.phone" placeholder="Phone Number" />
+        <input [(ngModel)]="address.line1" placeholder="Address Line" />
+        <div class="row2">
+          <input [(ngModel)]="address.city" placeholder="City" />
+          <input [(ngModel)]="address.state" placeholder="State" />
+        </div>
+        <input [(ngModel)]="address.pin" placeholder="PIN Code" />
+        <button (click)="nextStep()">Continue to Payment →</button>
+      </div>
+
+      <!-- Step 2: Payment -->
+      <div *ngIf="step() === 'payment'">
+        <h3>Payment Method</h3>
+        <div class="payment-options">
+          <label [class.selected]="paymentMethod === 'card'">
+            <input type="radio" [(ngModel)]="paymentMethod" value="card" /> 💳 Credit / Debit Card
+          </label>
+          <label [class.selected]="paymentMethod === 'upi'">
+            <input type="radio" [(ngModel)]="paymentMethod" value="upi" /> 📱 UPI
+          </label>
+          <label [class.selected]="paymentMethod === 'cod'">
+            <input type="radio" [(ngModel)]="paymentMethod" value="cod" /> 💵 Cash on Delivery
+          </label>
+        </div>
+
+        <div *ngIf="paymentMethod === 'card'" class="payment-form">
+          <input [(ngModel)]="card.number" placeholder="Card Number (16 digits)" maxlength="16" />
+          <div class="row2">
+            <input [(ngModel)]="card.expiry" placeholder="MM/YY" maxlength="5" />
+            <input [(ngModel)]="card.cvv" placeholder="CVV" maxlength="3" type="password" />
+          </div>
+        </div>
+
+        <div *ngIf="paymentMethod === 'upi'" class="payment-form">
+          <input [(ngModel)]="upi" placeholder="yourname@upi" />
+        </div>
+
+        <div *ngIf="paymentMethod === 'cod'" class="cod-note">
+          Pay in cash when your order is delivered.
+        </div>
+
+        <button (click)="nextStep()">Review Order →</button>
+      </div>
+
+      <!-- Step 3: Confirm -->
+      <div *ngIf="step() === 'confirm'">
+        <h3>Order Summary</h3>
+        <div class="confirm-items">
+          <div class="confirm-item" *ngFor="let item of cart.items()">
+            <span>{{ item.product.name }} × {{ item.quantity }}</span>
+            <span>${{ (item.product.price * item.quantity).toFixed(2) }}</span>
+          </div>
+        </div>
+        <div class="confirm-row"><span>Shipping</span><span class="free">FREE</span></div>
+        <div class="confirm-row total"><strong>Total</strong><strong>${{ cart.total().toFixed(2) }}</strong></div>
+        <div class="confirm-row"><span>Payment</span><span>{{ paymentMethod === 'card' ? 'Card' : paymentMethod === 'upi' ? 'UPI' : 'COD' }}</span></div>
+        <div class="confirm-row"><span>Deliver to</span><span>{{ address.name }}, {{ address.city }}</span></div>
+        <button class="place-btn" (click)="placeOrder()">✓ Place Order</button>
+      </div>
+    </div>
+
+    <!-- Cart Summary Sidebar -->
+    <div class="sidebar">
+      <h4>Cart ({{ cart.count() }} items)</h4>
+      <div class="s-item" *ngFor="let item of cart.items()">
+        <img [src]="item.product.image" [alt]="item.product.name" />
+        <div>
+          <p>{{ item.product.name }}</p>
+          <span>× {{ item.quantity }} — ${{ (item.product.price * item.quantity).toFixed(2) }}</span>
+        </div>
+      </div>
+      <div class="s-total">Total: <strong>${{ cart.total().toFixed(2) }}</strong></div>
+    </div>
+  </div>
+</div>

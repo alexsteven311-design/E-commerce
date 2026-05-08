@@ -1,0 +1,129 @@
+<div class="admin-page">
+  <div class="admin-header">
+    <h2>🛠️ Admin Dashboard</h2>
+    <p>Overview of your store performance</p>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card blue">
+      <span class="kpi-icon">💰</span>
+      <div>
+        <span class="kpi-val">${{ analytics.totalRevenue.toFixed(2) }}</span>
+        <span class="kpi-lbl">Total Revenue</span>
+      </div>
+    </div>
+    <div class="kpi-card green">
+      <span class="kpi-icon">📦</span>
+      <div>
+        <span class="kpi-val">{{ analytics.totalOrders }}</span>
+        <span class="kpi-lbl">Total Orders</span>
+      </div>
+    </div>
+    <div class="kpi-card purple">
+      <span class="kpi-icon">👥</span>
+      <div>
+        <span class="kpi-val">{{ users.length }}</span>
+        <span class="kpi-lbl">Registered Users</span>
+      </div>
+    </div>
+    <div class="kpi-card orange">
+      <span class="kpi-icon">🛍️</span>
+      <div>
+        <span class="kpi-val">{{ products.length }}</span>
+        <span class="kpi-lbl">Total Products</span>
+      </div>
+    </div>
+    <div class="kpi-card red">
+      <span class="kpi-icon">⚠️</span>
+      <div>
+        <span class="kpi-val">{{ lowStock.length }}</span>
+        <span class="kpi-lbl">Low Stock Items</span>
+      </div>
+    </div>
+    <div class="kpi-card teal">
+      <span class="kpi-icon">📈</span>
+      <div>
+        <span class="kpi-val">${{ analytics.avgOrder.toFixed(2) }}</span>
+        <span class="kpi-lbl">Avg Order Value</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+
+    <!-- Monthly Revenue Chart -->
+    <div class="panel">
+      <h3>📅 Monthly Revenue</h3>
+      @if (analytics.monthly.length === 0) {
+        <p class="no-data">No orders yet.</p>
+      }
+      <div class="bar-chart">
+        @for (m of analytics.monthly; track m.month) {
+          <div class="bc-col">
+            <span class="bc-val">${{ m.revenue.toFixed(0) }}</span>
+            <div class="bc-outer">
+              <div class="bc-bar" [style.height.%]="(m.revenue / analytics.monthly[0].revenue) * 100"></div>
+            </div>
+            <span class="bc-label">{{ m.month }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Revenue by Category -->
+    <div class="panel">
+      <h3>🏷️ Revenue by Category</h3>
+      @if (analytics.byCategory.length === 0) {
+        <p class="no-data">No data yet.</p>
+      }
+      @for (c of analytics.byCategory; track c.cat) {
+        <div class="cat-row">
+          <span class="cat-name">{{ c.cat }}</span>
+          <div class="cat-track">
+            <div class="cat-fill" [style.width.%]="(c.revenue / analytics.byCategory[0].revenue) * 100"></div>
+          </div>
+          <span class="cat-val">${{ c.revenue.toFixed(2) }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Top Products -->
+    <div class="panel">
+      <h3>🏆 Top Products</h3>
+      @if (analytics.topProducts.length === 0) {
+        <p class="no-data">No sales yet.</p>
+      }
+      <div class="top-products">
+        @for (p of analytics.topProducts; track p.name; let i = $index) {
+          <div class="tp-row">
+            <span class="tp-rank">#{{ i + 1 }}</span>
+            <span class="tp-name">{{ p.name }}</span>
+            <span class="tp-qty">{{ p.qty }} sold</span>
+            <span class="tp-rev">${{ p.revenue.toFixed(2) }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="panel">
+      <h3>⚡ Quick Actions</h3>
+      <div class="quick-links">
+        <a routerLink="/admin/products" class="ql-card">
+          <span>📦</span><span>Manage Products</span>
+        </a>
+        <a routerLink="/admin/users" class="ql-card">
+          <span>👥</span><span>Manage Users</span>
+        </a>
+        <a routerLink="/admin/orders" class="ql-card">
+          <span>🧾</span><span>View Orders</span>
+        </a>
+        <a routerLink="/admin/inventory" class="ql-card">
+          <span>📊</span><span>Inventory</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,219 @@
+<div class="products-page">
+  <!-- Filters Sidebar -->
+  <aside class="filters">
+    <h3>Filters</h3>
+
+    <label>Category</label>
+    <select [(ngModel)]="category">
+      <option value="">All</option>
+      @for (c of categories; track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+
+    <label>Max Price: ${{ maxPrice }}</label>
+    <input type="range" [(ngModel)]="maxPrice" min="10" max="300" step="5" />
+
+    <label>Min Rating: {{ minRating }}★</label>
+    <input type="range" [(ngModel)]="minRating" min="0" max="5" step="0.5" />
+
+    <button class="reset" (click)="category=''; maxPrice=300; minRating=0">Reset</button>
+
+    <!-- Admin Panel -->
+    <div class="divider"></div>
+    <a routerLink="/admin" class="admin-link">
+      <span>🛠️</span>
+      <div>
+        <span class="admin-link-title">Admin Panel</span>
+        <span class="admin-link-sub">Manage your store</span>
+      </div>
+      <span class="admin-arrow">›</span>
+    </a>
+
+    <!-- Alerts -->
+    <div class="divider"></div>
+    <div class="sidebar-alerts">
+      <div class="sidebar-alerts-header">
+        <span>🔔 Alerts</span>
+        @if (alertService.getAlerts().length > 0) {
+          <span class="alert-count">{{ alertService.getAlerts().length }}</span>
+        }
+      </div>
+
+      <select [(ngModel)]="alertFilter" class="alert-select">
+        <option value="all">All Alerts</option>
+        <option value="price_drop">📉 Price Drops</option>
+        <option value="budget">💸 Budget</option>
+        <option value="back_in_stock">⚡ Low Stock</option>
+      </select>
+
+      @if (alertService.getAlerts().length === 0) {
+        <p class="no-alerts-msg">✅ No active alerts.</p>
+      }
+
+      @for (alert of alertService.getAlerts(); track alert.id) {
+        @if (alertFilter === 'all' || alertFilter === alert.type) {
+          <div class="sidebar-alert-item" [class.price]="alert.type === 'price_drop'" [class.budget]="alert.type === 'budget'" [class.stock]="alert.type === 'back_in_stock'">
+            <div class="sa-top">
+              <span class="sa-icon">{{ alert.type === 'price_drop' ? '📉' : alert.type === 'budget' ? '💸' : '⚡' }}</span>
+              <span class="sa-title">{{ alert.title }}</span>
+              <button class="sa-dismiss" (click)="alertService.dismiss(alert.id)">✕</button>
+            </div>
+            <p class="sa-msg">{{ alert.message }}</p>
+            <span class="sa-time">{{ alert.time }}</span>
+          </div>
+        }
+      }
+
+      @if (alertService.getAlerts().length > 0) {
+        <button class="clear-alerts-btn" (click)="alertService.dismissAll()">Clear All</button>
+      }
+    </div>
+
+    <!-- Order History -->
+    <div class="divider"></div>
+    <div class="sidebar-orders">
+      <div class="sidebar-orders-header">
+        <span>📦 Order History</span>
+        <a routerLink="/orders">View All</a>
+      </div>
+      @if (recentOrders.length === 0) {
+        <p class="no-orders">No orders yet.</p>
+      }
+      @for (order of recentOrders; track order.id) {
+        <div class="sidebar-order">
+          <div class="sidebar-order-top">
+            <span class="sidebar-order-id">{{ order.id }}</span>
+            <span class="sidebar-order-status">{{ order.status }}</span>
+          </div>
+          <div class="sidebar-order-meta">
+            <span>{{ order.date }}</span>
+            <span class="sidebar-order-total">${{ order.total.toFixed(2) }}</span>
+          </div>
+          <div class="sidebar-order-items">
+            @for (item of order.items.slice(0, 2); track item.product.id) {
+              <img [src]="item.product.image" [alt]="item.product.name" [title]="item.product.name" />
+            }
+            @if (order.items.length > 2) {
+              <span class="more-items">+{{ order.items.length - 2 }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Spending Insights -->
+    <div class="divider"></div>
+    <div class="insights">
+      <div class="insights-header">📊 Spending Insights</div>
+      @if (!insights) {
+        <p class="no-orders">Place an order to see insights.</p>
+      }
+      @if (insights) {
+
+        <!-- Monthly Summary -->
+        <div class="ins-section-title">📅 Monthly Summary</div>
+        <div class="monthly-bars">
+          @for (m of insights.monthly; track m.month) {
+            <div class="month-col">
+              <div class="month-bar-wrap">
+                <div class="month-bar" [style.height.%]="(m.amt / insights.totalSpent) * 100 + 20"></div>
+              </div>
+              <span class="month-label">{{ m.month }}</span>
+              <span class="month-amt">${{ m.amt.toFixed(0) }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- Category Breakdown -->
+        <div class="ins-section-title">🏷️ Category Breakdown</div>
+        <div class="insight-bars">
+          @for (c of insights.categories; track c.cat) {
+            <div class="bar-row">
+              <span class="bar-label">{{ c.cat }}</span>
+              <div class="bar-track">
+                <div class="bar-fill" [style.width.%]="c.pct"></div>
+              </div>
+              <span class="bar-pct">{{ c.pct }}%</span>
+            </div>
+          }
+        </div>
+
+        <!-- Budget Tracking -->
+        <div class="ins-section-title">🎯 Budget Tracking</div>
+        <div class="budget-box" [class.over]="insights.budgetStatus === 'over'" [class.warning]="insights.budgetStatus === 'warning'">
+          <div class="budget-row">
+            <span>This Month</span>
+            <span class="budget-spent">${{ insights.thisMonthSpent.toFixed(2) }} / ${{ insights.budgetVal }}</span>
+          </div>
+          <div class="budget-track">
+            <div class="budget-fill" [style.width.%]="insights.budgetPct"></div>
+          </div>
+          <div class="budget-status">
+            @if (insights.budgetStatus === 'over') { <span class="status-over">⚠️ Over budget!</span> }
+            @if (insights.budgetStatus === 'warning') { <span class="status-warn">🔶 Near limit ({{ insights.budgetPct }}%)</span> }
+            @if (insights.budgetStatus === 'safe') { <span class="status-safe">✅ On track ({{ insights.budgetPct }}%)</span> }
+          </div>
+          @if (!editingBudget()) {
+            <button class="budget-edit-btn" (click)="editingBudget.set(true); budgetInput = insights.budgetVal">✏️ Set Budget</button>
+          }
+          @if (editingBudget()) {
+            <div class="budget-edit">
+              <input type="number" [(ngModel)]="budgetInput" min="1" />
+              <button (click)="saveBudget()">Save</button>
+            </div>
+          }
+        </div>
+
+      }
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <section class="main-content">
+
+    <!-- Product Grid -->
+    <div class="grid">
+      <p class="count">{{ products.length }} product(s) found</p>
+      @if (products.length === 0) {
+        <div class="no-results">No products match your filters.</div>
+      }
+      <div class="cards">
+        @for (p of products; track p.id) {
+          <div class="card">
+            <img [src]="p.image" [alt]="p.name" />
+            <div class="card-body">
+              <span class="category-tag">{{ p.category }}</span>
+              <h3>{{ p.name }}</h3>
+              <p>{{ p.description }}</p>
+              <div class="stars">{{ stars(p.rating) }} <span>({{ p.rating }})</span></div>
+              <div class="card-footer">
+                <span class="price">${{ p.price.toFixed(2) }}</span>
+                <button (click)="addToCart(p)" [class.added]="added() === p.id">
+                  {{ added() === p.id ? '✓ Added' : 'Add to Cart' }}
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Recommended For You -->
+    <app-recommendation
+      [products]="recommended"
+      title="Recommended For You"
+      subtitle="Based on your order history and top ratings"
+      icon="✨">
+    </app-recommendation>
+
+    <!-- People Also Bought -->
+    <app-recommendation
+      [products]="peopleAlsoBought"
+      title="People Also Bought"
+      subtitle="Customers who bought items in your cart also purchased these"
+      icon="🛍️">
+    </app-recommendation>
+
+  </section>
+</div>

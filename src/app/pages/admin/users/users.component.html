@@ -1,0 +1,44 @@
+<div class="admin-page">
+  <div class="page-top">
+    <div>
+      <h2>👥 Manage Users</h2>
+      <p>View and manage registered users</p>
+    </div>
+    <span class="total-badge">{{ users().length }} users</span>
+  </div>
+
+  <div class="table-wrap">
+    @if (users().length === 0) {
+      <div class="empty-table">No registered users yet.</div>
+    }
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (u of users(); track u.email; let i = $index) {
+          <tr>
+            <td>{{ i + 1 }}</td>
+            <td>
+              <div class="user-info">
+                <div class="avatar">{{ u.name[0].toUpperCase() }}</div>
+                <strong>{{ u.name }}</strong>
+              </div>
+            </td>
+            <td>{{ u.email }}</td>
+            <td><span class="role-badge" [class.admin]="u.role === 'admin'">{{ u.role || 'user' }}</span></td>
+            <td>
+              <button class="btn-delete" (click)="delete(u.email)">🗑️ Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

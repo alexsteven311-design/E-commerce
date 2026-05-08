@@ -1,0 +1,246 @@
+<div class="dashboard">
+
+  <!-- Dashboard Header -->
+  <div class="dash-header">
+    <div>
+      <h2>📊 Spending Insights</h2>
+      <p>Track your shopping habits and manage your budget</p>
+    </div>
+  </div>
+
+  @if (!insights) {
+    <div class="empty">
+      <div class="empty-icon">📦</div>
+      <h3>No data yet</h3>
+      <p>Place your first order to start seeing spending insights.</p>
+      <a routerLink="/products">Start Shopping</a>
+    </div>
+  }
+
+  @if (insights) {
+
+    <!-- KPI Strip -->
+    <div class="kpi-strip">
+      <div class="kpi">
+        <span class="kpi-icon">💰</span>
+        <div>
+          <span class="kpi-val">${{ insights.totalSpent.toFixed(2) }}</span>
+          <span class="kpi-lbl">Total Spent</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <span class="kpi-icon">🛒</span>
+        <div>
+          <span class="kpi-val">{{ insights.orderCount }}</span>
+          <span class="kpi-lbl">Orders</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <span class="kpi-icon">📈</span>
+        <div>
+          <span class="kpi-val">${{ insights.avgOrder.toFixed(2) }}</span>
+          <span class="kpi-lbl">Avg Order</span>
+        </div>
+      </div>
+      <div class="kpi accent">
+        <span class="kpi-icon">📅</span>
+        <div>
+          <span class="kpi-val">${{ insights.thisMonthSpent.toFixed(2) }}</span>
+          <span class="kpi-lbl">This Month</span>
+        </div>
+      </div>
+      <div class="kpi" [class.kpi-danger]="insights.budgetStatus === 'over'" [class.kpi-warn]="insights.budgetStatus === 'warning'">
+        <span class="kpi-icon">🎯</span>
+        <div>
+          <span class="kpi-val">{{ insights.rawPct.toFixed(0) }}%</span>
+          <span class="kpi-lbl">Budget Used</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab" [class.active]="activeTab === 'monthly'" (click)="activeTab = 'monthly'">
+        📅 Monthly Summary
+      </button>
+      <button class="tab" [class.active]="activeTab === 'category'" (click)="activeTab = 'category'">
+        🏷️ Category Spending
+      </button>
+      <button class="tab" [class.active]="activeTab === 'budget'" (click)="activeTab = 'budget'">
+        🎯 Budget Tracking
+        @if (insights.budgetStatus !== 'safe') {
+          <span class="tab-badge">!</span>
+        }
+      </button>
+    </div>
+
+    <!-- ── Tab: Monthly Summary ── -->
+    @if (activeTab === 'monthly') {
+      <div class="tab-panel">
+        <div class="panel-head">
+          <div>
+            <h3>Monthly Shopping Summary</h3>
+            <p>Your spending trend across all months</p>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="chart-wrap">
+          <div class="chart-y-axis">
+            <span>${{ insights.maxMonthly.toFixed(0) }}</span>
+            <span>${{ (insights.maxMonthly / 2).toFixed(0) }}</span>
+            <span>$0</span>
+          </div>
+          <div class="chart-bars">
+            @for (m of insights.allMonthly; track m.month) {
+              <div class="bar-col">
+                <div class="bar-tooltip">${{ m.amt.toFixed(2) }}<br/>{{ m.count }} order{{ m.count > 1 ? 's' : '' }}</div>
+                <div class="bar-outer">
+                  <div class="bar-inner" [style.height.%]="(m.amt / insights.maxMonthly) * 100"></div>
+                </div>
+                <span class="bar-month">{{ m.month }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Monthly Table -->
+        <div class="monthly-table">
+          <div class="mt-head">
+            <span>Month</span><span>Orders</span><span>Spent</span><span>Avg/Order</span>
+          </div>
+          @for (m of insights.allMonthly; track m.month) {
+            <div class="mt-row">
+              <span class="mt-month">{{ m.month }}</span>
+              <span>{{ m.count }}</span>
+              <span class="mt-amt">${{ m.amt.toFixed(2) }}</span>
+              <span>${{ (m.amt / m.count).toFixed(2) }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- ── Tab: Category Spending ── -->
+    @if (activeTab === 'category') {
+      <div class="tab-panel">
+        <div class="panel-head">
+          <div>
+            <h3>Category-wise Spending</h3>
+            <p>Breakdown of where your money goes</p>
+          </div>
+        </div>
+
+        <div class="cat-layout">
+          <!-- Donut-style summary -->
+          <div class="cat-summary">
+            @for (c of insights.categories; track c.cat) {
+              <div class="cat-row">
+                <div class="cat-dot" [style.background]="catColor(c.cat)"></div>
+                <span class="cat-name">{{ c.cat }}</span>
+                <div class="cat-bar-track">
+                  <div class="cat-bar-fill" [style.width.%]="c.pct" [style.background]="catColor(c.cat)"></div>
+                </div>
+                <span class="cat-pct">{{ c.pct }}%</span>
+                <span class="cat-amt">${{ c.amt.toFixed(2) }}</span>
+              </div>
+            }
+          </div>
+
+          <!-- Category Cards -->
+          <div class="cat-cards">
+            @for (c of insights.categories; track c.cat) {
+              <div class="cat-card" [style.border-top-color]="catColor(c.cat)">
+                <div class="cc-top">
+                  <span class="cc-name">{{ c.cat }}</span>
+                  <span class="cc-badge" [style.background]="catColor(c.cat)">{{ c.pct }}%</span>
+                </div>
+                <span class="cc-amt">${{ c.amt.toFixed(2) }}</span>
+                <span class="cc-items">{{ c.count }} item{{ c.count > 1 ? 's' : '' }} purchased</span>
+                <div class="cc-bar-track">
+                  <div class="cc-bar-fill" [style.width.%]="c.pct" [style.background]="catColor(c.cat)"></div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- ── Tab: Budget Tracking ── -->
+    @if (activeTab === 'budget') {
+      <div class="tab-panel">
+        <div class="panel-head">
+          <div>
+            <h3>Budget Tracking</h3>
+            <p>Monitor your monthly spending against your set budget</p>
+          </div>
+          @if (!editingBudget()) {
+            <button class="edit-btn" (click)="editingBudget.set(true); budgetInput = insights.budgetVal">✏️ Edit Budget</button>
+          }
+        </div>
+
+        @if (editingBudget()) {
+          <div class="budget-edit-box">
+            <label>Set Monthly Budget ($)</label>
+            <div class="budget-edit-row">
+              <input type="number" [(ngModel)]="budgetInput" min="1" placeholder="Enter amount" />
+              <button class="save-btn" (click)="saveBudget()">Save</button>
+              <button class="cancel-btn" (click)="editingBudget.set(false)">Cancel</button>
+            </div>
+          </div>
+        }
+
+        <!-- Status Banner -->
+        <div class="budget-banner" [class.safe]="insights.budgetStatus === 'safe'" [class.warning]="insights.budgetStatus === 'warning'" [class.over]="insights.budgetStatus === 'over'">
+          @if (insights.budgetStatus === 'safe') { ✅ You're on track — ${{ insights.remaining.toFixed(2) }} remaining this month. }
+          @if (insights.budgetStatus === 'warning') { 🔶 Heads up! You've used {{ insights.rawPct.toFixed(0) }}% of your ${{ insights.budgetVal }} budget. }
+          @if (insights.budgetStatus === 'over') { ⚠️ Over budget by ${{ (insights.thisMonthSpent - insights.budgetVal).toFixed(2) }} this month! }
+        </div>
+
+        <!-- Budget Meter -->
+        <div class="budget-meter">
+          <div class="bm-labels">
+            <span>$0</span>
+            <span>${{ (insights.budgetVal / 2).toFixed(0) }}</span>
+            <span>${{ insights.budgetVal }}</span>
+          </div>
+          <div class="bm-track">
+            <div class="bm-fill" [style.width.%]="insights.budgetPct" [class.safe]="insights.budgetStatus === 'safe'" [class.warning]="insights.budgetStatus === 'warning'" [class.over]="insights.budgetStatus === 'over'">
+              <span class="bm-label">${{ insights.thisMonthSpent.toFixed(2) }}</span>
+            </div>
+          </div>
+          <div class="bm-markers">
+            <div class="bm-marker warn-marker" style="left:80%">80%</div>
+          </div>
+        </div>
+
+        <!-- Budget Stats Grid -->
+        <div class="budget-stats">
+          <div class="bs-card">
+            <span class="bs-icon">💸</span>
+            <span class="bs-val">${{ insights.thisMonthSpent.toFixed(2) }}</span>
+            <span class="bs-lbl">Spent This Month</span>
+          </div>
+          <div class="bs-card">
+            <span class="bs-icon">🎯</span>
+            <span class="bs-val">${{ insights.budgetVal }}</span>
+            <span class="bs-lbl">Monthly Budget</span>
+          </div>
+          <div class="bs-card" [class.danger]="insights.budgetStatus === 'over'">
+            <span class="bs-icon">💰</span>
+            <span class="bs-val">${{ insights.remaining.toFixed(2) }}</span>
+            <span class="bs-lbl">Remaining</span>
+          </div>
+          <div class="bs-card">
+            <span class="bs-icon">📊</span>
+            <span class="bs-val">{{ insights.rawPct.toFixed(1) }}%</span>
+            <span class="bs-lbl">Budget Used</span>
+          </div>
+        </div>
+
+      </div>
+    }
+
+  }
+</div>

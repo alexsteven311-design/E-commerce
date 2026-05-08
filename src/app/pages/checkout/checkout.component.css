@@ -1,0 +1,40 @@
+.checkout-page { padding:32px; max-width:1000px; margin:0 auto; }
+
+.steps { display:flex; align-items:center; gap:8px; margin-bottom:32px; font-size:14px; color:#aaa; }
+.steps span.active { color:#1a1a2e; font-weight:bold; }
+.steps span.done { color:#27ae60; }
+.sep { color:#ddd; }
+
+.layout { display:flex; gap:24px; align-items:flex-start; }
+
+.form-card { flex:1; background:white; border-radius:12px; padding:28px; box-shadow:0 2px 8px rgba(0,0,0,0.07); display:flex; flex-direction:column; gap:14px; }
+.form-card h3 { font-size:18px; color:#1a1a2e; margin-bottom:4px; }
+.error { background:#ffeaea; color:#e94560; padding:10px; border-radius:6px; font-size:13px; }
+
+input[type=text], input:not([type=radio]):not([type=range]) { padding:11px; border:1px solid #ddd; border-radius:8px; font-size:14px; outline:none; width:100%; }
+input:focus { border-color:#1a1a2e; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+button { background:#1a1a2e; color:white; border:none; padding:12px; border-radius:8px; font-size:15px; cursor:pointer; width:100%; margin-top:8px; }
+button:hover { background:#e94560; }
+.place-btn { background:#27ae60; }
+.place-btn:hover { background:#1e8449; }
+
+.payment-options { display:flex; flex-direction:column; gap:10px; }
+.payment-options label { display:flex; align-items:center; gap:10px; padding:12px; border:2px solid #eee; border-radius:8px; cursor:pointer; font-size:14px; }
+.payment-options label.selected { border-color:#1a1a2e; background:#f8f8ff; }
+.payment-form { display:flex; flex-direction:column; gap:12px; margin-top:4px; }
+.cod-note { background:#f0fff4; color:#27ae60; padding:12px; border-radius:8px; font-size:14px; }
+
+.confirm-items { display:flex; flex-direction:column; gap:8px; }
+.confirm-item, .confirm-row { display:flex; justify-content:space-between; font-size:14px; padding:8px 0; border-bottom:1px solid #f0f0f0; }
+.confirm-row.total { font-size:16px; border-bottom:none; padding-top:12px; }
+.free { color:#27ae60; font-weight:bold; }
+
+.sidebar { width:260px; background:white; border-radius:12px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.07); position:sticky; top:74px; }
+.sidebar h4 { font-size:15px; color:#1a1a2e; margin-bottom:14px; }
+.s-item { display:flex; gap:10px; align-items:center; margin-bottom:12px; }
+.s-item img { width:48px; height:48px; object-fit:cover; border-radius:6px; }
+.s-item p { font-size:13px; font-weight:bold; color:#1a1a2e; }
+.s-item span { font-size:12px; color:#888; }
+.s-total { font-size:14px; border-top:1px solid #eee; padding-top:12px; text-align:right; }

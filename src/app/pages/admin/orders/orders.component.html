@@ -1,0 +1,48 @@
+<div class="admin-page">
+  <div class="page-top">
+    <div>
+      <h2>🧾 View Orders</h2>
+      <p>All customer orders placed in the store</p>
+    </div>
+    <span class="total-badge">{{ orders.length }} orders</span>
+  </div>
+
+  <div class="table-wrap">
+    @if (orders.length === 0) {
+      <div class="empty-table">No orders placed yet.</div>
+    }
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date</th>
+          <th>Items</th>
+          <th>Payment</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (o of orders; track o.id) {
+          <tr>
+            <td><span class="order-id">{{ o.id }}</span></td>
+            <td>{{ o.date }}</td>
+            <td>
+              <div class="order-items">
+                @for (item of o.items.slice(0,2); track item.product.id) {
+                  <img [src]="item.product.image" [alt]="item.product.name" [title]="item.product.name + ' x' + item.quantity" />
+                }
+                @if (o.items.length > 2) {
+                  <span class="more">+{{ o.items.length - 2 }}</span>
+                }
+              </div>
+            </td>
+            <td>{{ o.payment }}</td>
+            <td class="price">${{ o.total.toFixed(2) }}</td>
+            <td><span class="status-badge">{{ o.status }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
