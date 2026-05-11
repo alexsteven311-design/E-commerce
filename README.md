@@ -397,6 +397,7 @@ For issues, questions, or suggestions, please:
  - Quick Actions for immediate navigation such as managing products, users, and checking inventory.
 
 ## 🧾 Orders Management
+![image alt](https://github.com/alexsteven311-design/E-commerce/blob/d0d28793ad6036ad3908e8e4dd13dd727f62f0e5/Orders-1778467875687.png)
 The Orders page displays all customer orders with detailed info:
 
 - Order ID, Date, Items, Payment Method, Total, and Status
