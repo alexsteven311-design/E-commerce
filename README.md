@@ -330,3 +330,4 @@ For issues, questions, or suggestions, please:
 **Happy coding! 🚀**
 
 ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/f6dffcd45f148e2f1dd0bebf6849acd9ffe37f98/Screenshot_11-5-2026_10848_localhost.jpeg)
+![image alt](https://github.com/alexsteven311-design/E-commerce/blob/74cc2559e0a98fd7023de7dee2910ad76c8f66e1/screenshot-1778474380514.png)
