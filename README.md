@@ -434,6 +434,7 @@ The Inventory page keeps all stock data organized:
    🔴 0 Out
 
 ## 🛒Shopping Cart
+![image alt](
 - Provides a clear breakdown of selected items with real-time price calculations.
 - Features an "Order Summary" sidebar that remains consistent throughout the checkout process.
 - Supports quantity adjustments and item removal directly from the cart view.
