@@ -440,7 +440,7 @@ The Inventory page keeps all stock data organized:
 - Supports quantity adjustments and item removal directly from the cart view.
 
 ## 🪪Streamlined Multi-Step Checkout:
-
+![image alt](
 - Address Management: A clean form for delivery details including validation-ready fields for contact info and pin codes.
 - Secure Payment Integration: Support for multiple payment gateways including Credit/Debit Cards, UPI, and Cash on Delivery (COD).
 - Order Review: A final confirmation step that aggregates delivery address, payment method, and itemized costs to ensure accuracy before placing the order.
