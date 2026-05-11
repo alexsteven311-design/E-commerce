@@ -343,6 +343,7 @@ For issues, questions, or suggestions, please:
 ## 2.📊Spending Insights
    ## 💰Monthly Spending
   ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/233c2b9530fe18419ef60b4d6fc2933356be9d89/Monthly%20summary_11-5-2026_83641_localhost.jpeg)
+## How it works
 - Displays total monthly spending
 - Average order value calculation
 - Total order count
@@ -351,6 +352,7 @@ For issues, questions, or suggestions, please:
 
   ## 🏷️Category-Wise spending Analysis
   ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/4f9b4ce1a6129bf3df5d94e6ce8a65fb70c505e3/Category%20spending_11-5-2026_83740_localhost.jpeg)
+  ## How it works
 - Visual breakdown of spending by categories
 - Percentage-based spending distribution
 - Interactive progress indicators
@@ -358,3 +360,12 @@ For issues, questions, or suggestions, please:
 - Helps identify major spending areas
 
   ## 🎯Budget Tracking
+  ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/b86fe598106bb45f5b20e1017626d9fab10a0d1c/budget%20tracking_11-5-2026_8391_localhost.jpeg)
+  ## How it Works
+ - Monthly budget management
+ - Remaining budget calculation
+ - Budget usage percentage tracking
+ - Visual spending progress bar
+ - Budget alert and monitoring system
+
+## 🔔 Smart Alerts & Notifications
