@@ -1,4 +1,4 @@
-# 🛒 E-Commerce Platform
+# 🛒 ShopZone: A Full-Stack E-Commerce Ecosystem with Integrated Analytics
 
 A modern, full-stack e-commerce application built with **Angular** (frontend) and **Spring Boot** (backend). This platform provides a seamless shopping experience with product browsing, filtering, and an admin dashboard.
 
