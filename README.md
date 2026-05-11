@@ -407,7 +407,8 @@ The Orders page displays all customer orders with detailed info:
  The Users section enables admins to view and manage registered accounts.
  Admins can monitor roles, remove users, or expand functionality for role‑based access control.
 
- 🏷️ Products Management
+ ## 🏷️ Products Management
+ ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/c0714fc4d390e1953d3d978fb30fd01cf8e98ad9/Products-1778467763970.png)
 Under Manage Products, admins can view, edit, or delete product details.
 
 Key columns include:
