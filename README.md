@@ -369,3 +369,7 @@ For issues, questions, or suggestions, please:
  - Budget alert and monitoring system
 
 ## 🔔 Smart Alerts & Notifications
+- Low stock alerts
+- Shopping notifications
+- Real-time alert counter
+- Inventory reminders
