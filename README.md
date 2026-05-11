@@ -339,3 +339,7 @@ For issues, questions, or suggestions, please:
 - Interactive cards and analytics
 - User-friendly shopping interface
 - Minimal and professional design
+
+## 2.📊Spending Insights
+  ## 💰Monthly Spending
+  ![image alt](
