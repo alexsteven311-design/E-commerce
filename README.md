@@ -380,3 +380,51 @@ For issues, questions, or suggestions, please:
 - Inventory handling support
 ## Admin dashboard
 ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/d771f6c60de666b8c861b14aef380dda13a0dd2b/Admin%20dashboard-1778467813658.png)
+## Dashboard Overview
+ - Admin Dashboard offers a quick performance summary of the store, including key metrics:
+  💰 Total Revenue: ₹409.95
+  📦 Total Orders: 1
+  👥 Registered Users: 1
+  🛒 Total Products: 16
+  ⚠️ Low‑Stock Items: 2
+  💹 Average Order Value: ₹409.95
+
+     ## Additional insights include:
+
+ - Monthly Revenue chart displaying revenue trends.
+ - Revenue by Category visualization (e.g., Electronics ₹349.96, Fashion ₹59.99).
+ - Top Products ranked by sales and revenue.
+ - Quick Actions for immediate navigation such as managing products, users, and checking inventory.
+
+## 🧾 Orders Management
+The Orders page displays all customer orders with detailed info:
+
+- Order ID, Date, Items, Payment Method, Total, and Status
+  Example: Order ID ORD‑1778466650894, placed on 11/5/2026, total $409.95, paid via Cash on Delivery, status Confirmed.
+
+## 🧍 Users Management
+ The Users section enables admins to view and manage registered accounts.
+ Admins can monitor roles, remove users, or expand functionality for role‑based access control.
+
+ 🏷️ Products Management
+Under Manage Products, admins can view, edit, or delete product details.
+
+Key columns include:
+
+- ID, Image, Name, Category, Price, Stock, Rating, and Actions
+- Each product comes with Edit and Delete buttons for quick updates.
+- Visual low‑stock alerts (e.g., stock count displayed in red when low).
+Example entries:
+
+- Mechanical Keyboard – ₹10,800.00 – Stock: 5 – ⭐ 4.7
+- Wireless Headphones – ₹6,640.00 – Stock: 10 – ⭐ 4.5
+
+## 📦 Inventory Tracking
+The Inventory page keeps all stock data organized:
+
+- Shows product name, category, price, stock count, and status (In Stock / Low Stock / Out of Stock).
+- Products can be edited directly to update stock levels.
+   Quick stock overview:
+   ✅ 14 In Stock
+   🟡 2 Low
+   🔴 0 Out
