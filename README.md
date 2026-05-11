@@ -423,6 +423,7 @@ Example entries:
 - Wireless Headphones – ₹6,640.00 – Stock: 10 – ⭐ 4.5
 
 ## 📦 Inventory Tracking
+![image alt](https://github.com/alexsteven311-design/E-commerce/blob/8259776b808101fc378e141b134bcb9105889e82/Inventory-1778467849908.png)
 The Inventory page keeps all stock data organized:
 
 - Shows product name, category, price, stock count, and status (In Stock / Low Stock / Out of Stock).
