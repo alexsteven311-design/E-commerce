@@ -404,6 +404,7 @@ The Orders page displays all customer orders with detailed info:
   Example: Order ID ORD‑1778466650894, placed on 11/5/2026, total $409.95, paid via Cash on Delivery, status Confirmed.
 
 ## 🧍 Users Management
+![image alt](https://github.com/alexsteven311-design/E-commerce/blob/6eceb10edd85c1b4fc326c91f6e7a2f25c6abdba/User-1778466797613.png)
  The Users section enables admins to view and manage registered accounts.
  Admins can monitor roles, remove users, or expand functionality for role‑based access control.
 
