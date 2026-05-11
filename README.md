@@ -432,3 +432,20 @@ The Inventory page keeps all stock data organized:
    ✅ 14 In Stock
    🟡 2 Low
    🔴 0 Out
+
+## 🛒Shopping Cart
+- Provides a clear breakdown of selected items with real-time price calculations.
+- Features an "Order Summary" sidebar that remains consistent throughout the checkout process.
+- Supports quantity adjustments and item removal directly from the cart view.
+
+## 🪪Streamlined Multi-Step Checkout:
+
+- Address Management: A clean form for delivery details including validation-ready fields for contact info and pin codes.
+- Secure Payment Integration: Support for multiple payment gateways including Credit/Debit Cards, UPI, and Cash on Delivery (COD).
+- Order Review: A final confirmation step that aggregates delivery address, payment method, and itemized costs to ensure accuracy before placing the order.
+
+## 🛍️ Order Management & History:
+
+ - Post-purchase tracking via a dedicated "Order History" page.
+ - Unique order ID generation (e.g., ORD-1778468258235) for easy support and tracking.
+ - Visual status indicators (e.g., "Confirmed" badges) to provide instant feedback to the user.
