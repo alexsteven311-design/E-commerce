@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject, signal } from '@angular/core';
 import { Product, User, Order } from '../models/models';
 
 const BASE_PRODUCTS: Product[] = [
@@ -22,9 +23,23 @@ const BASE_PRODUCTS: Product[] = [
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:8080/api';
   private productsKey = 'admin_products';
 
   products = signal<Product[]>(this.loadProducts());
+
+  constructor() {
+    this.http.get<Product[]>(`${this.apiUrl}/products`).subscribe({
+      next: products => {
+        this.products.set(products);
+        this.saveProducts();
+      },
+      error: () => {
+        // Keep the local demo products when the backend is not running.
+      }
+    });
+  }
 
   private loadProducts(): Product[] {
     const saved = localStorage.getItem(this.productsKey);
