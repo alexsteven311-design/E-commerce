@@ -446,7 +446,7 @@ The Inventory page keeps all stock data organized:
 - Order Review: A final confirmation step that aggregates delivery address, payment method, and itemized costs to ensure accuracy before placing the order.
 
 ## 🛍️ Order Management & History:
-
+![image alt](https://github.com/alexsteven311-design/E-commerce/blob/8b203ecbeca4202e695c420d9eab6724dc138016/Order%20history-1778468274873.png)
  - Post-purchase tracking via a dedicated "Order History" page.
  - Unique order ID generation (e.g., ORD-1778468258235) for easy support and tracking.
  - Visual status indicators (e.g., "Confirmed" badges) to provide instant feedback to the user.
