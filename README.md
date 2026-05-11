@@ -433,19 +433,19 @@ The Inventory page keeps all stock data organized:
    🟡 2 Low
    🔴 0 Out
 
-## 🛒Shopping Cart
+## 5.🛒Shopping Cart
 ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/566163974af729009ed4224a1f340177c3137dfc/Cart-1778467942374.png)
 - Provides a clear breakdown of selected items with real-time price calculations.
 - Features an "Order Summary" sidebar that remains consistent throughout the checkout process.
 - Supports quantity adjustments and item removal directly from the cart view.
 
-## 🪪Streamlined Multi-Step Checkout:
+## 6.🪪Streamlined Multi-Step Checkout:
 ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/2b1fb75e7fd3a23271fb2b8f4f340983ced4f8b0/Address-1778468150769.png) ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/7836a82c66a5ff414e25a2d0769344b61e5b315e/Payment-1778468207029.png) ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/ed5c5aaf20f52bd8adeddff7b9eb64b215e825e3/confirm%20order-1778468238760.png)
 - Address Management: A clean form for delivery details including validation-ready fields for contact info and pin codes.
 - Secure Payment Integration: Support for multiple payment gateways including Credit/Debit Cards, UPI, and Cash on Delivery (COD).
 - Order Review: A final confirmation step that aggregates delivery address, payment method, and itemized costs to ensure accuracy before placing the order.
 
-## 🛍️ Order Management & History:
+## 7.🛍️ Order Management & History:
 ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/8b203ecbeca4202e695c420d9eab6724dc138016/Order%20history-1778468274873.png)
  - Post-purchase tracking via a dedicated "Order History" page.
  - Unique order ID generation (e.g., ORD-1778468258235) for easy support and tracking.
