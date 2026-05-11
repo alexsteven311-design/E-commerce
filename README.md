@@ -440,7 +440,7 @@ The Inventory page keeps all stock data organized:
 - Supports quantity adjustments and item removal directly from the cart view.
 
 ## 🪪Streamlined Multi-Step Checkout:
-![image alt](https://github.com/alexsteven311-design/E-commerce/blob/2b1fb75e7fd3a23271fb2b8f4f340983ced4f8b0/Address-1778468150769.png) ![image alt](
+![image alt](https://github.com/alexsteven311-design/E-commerce/blob/2b1fb75e7fd3a23271fb2b8f4f340983ced4f8b0/Address-1778468150769.png) ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/7836a82c66a5ff414e25a2d0769344b61e5b315e/Payment-1778468207029.png) ![image alt](
 - Address Management: A clean form for delivery details including validation-ready fields for contact info and pin codes.
 - Secure Payment Integration: Support for multiple payment gateways including Credit/Debit Cards, UPI, and Cash on Delivery (COD).
 - Order Review: A final confirmation step that aggregates delivery address, payment method, and itemized costs to ensure accuracy before placing the order.
