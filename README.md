@@ -368,8 +368,15 @@ For issues, questions, or suggestions, please:
  - Visual spending progress bar
  - Budget alert and monitoring system
 
-## 🔔 Smart Alerts & Notifications
+## 3.🔔 Smart Alerts & Notifications
 - Low stock alerts
 - Shopping notifications
 - Real-time alert counter
 - Inventory reminders
+## 4.🛠️Admin features
+- Admin control panel
+- Product management
+- Store monitoring tools
+- Inventory handling support
+## Admin dashboard
+![image alt](https://github.com/alexsteven311-design/E-commerce/blob/d771f6c60de666b8c861b14aef380dda13a0dd2b/Admin%20dashboard-1778467813658.png)
