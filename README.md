@@ -341,7 +341,7 @@ For issues, questions, or suggestions, please:
 - Minimal and professional design
 
 ## 2.📊Spending Insights
-  ## 💰Monthly Spending
+   ## 💰Monthly Spending
   ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/233c2b9530fe18419ef60b4d6fc2933356be9d89/Monthly%20summary_11-5-2026_83641_localhost.jpeg)
 - Displays total monthly spending
 - Average order value calculation
