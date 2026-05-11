@@ -350,3 +350,11 @@ For issues, questions, or suggestions, please:
 - Spending history table for better tracking
 
   ## 🏷️Category-Wise spending Analysis
+  ![image alt](https://github.com/alexsteven311-design/E-commerce/blob/4f9b4ce1a6129bf3df5d94e6ce8a65fb70c505e3/Category%20spending_11-5-2026_83740_localhost.jpeg)
+- Visual breakdown of spending by categories
+- Percentage-based spending distribution
+- Interactive progress indicators
+- Purchase count per category
+- Helps identify major spending areas
+
+  ## 🎯Budget Tracking
